@@ -7,10 +7,20 @@ osakkeita=19
 
 df = pd.read_excel(sys.argv[1])
 
+def columni(x):
+    return ord(x)-ord('A')
+
 subset = df.iloc[2:, [10, 23]].copy()
 #subset.iloc[:, 1] = pd.to_numeric(subset.iloc[:, 1].astype(str).str.replace(',', '.').str.replace(r'\s+', '', regex=True), errors='coerce')
 result = subset.dropna().sort_values(by=subset.columns[1], ascending=False)
+print()
+print(' ** VOITTAJAT **')
 print(result)
+print()
+print(' ** VOITTAJAT TÄNÄÄN **')
+subset = df.iloc[2:, [10, columni('Z')+1]].copy()
+result2 = subset.dropna().sort_values(by=subset.columns[1], ascending=False)
+print(result2)
 
 summa=0
 nettosumma=0
