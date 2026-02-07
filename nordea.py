@@ -18,7 +18,7 @@ print(' ** VOITTAJAT **')
 print(result)
 print()
 print(' ** VOITTAJAT TÄNÄÄN **')
-subset = df.iloc[2:, [10, columni('Z')+1]].copy()
+subset = df.iloc[2:, [10, columni('Z')]].copy()
 result2 = subset.dropna().sort_values(by=subset.columns[1], ascending=False)
 print(result2)
 
@@ -32,10 +32,10 @@ for i in range(3,3+osakkeita):
     summa+=hinta
     osto=df.iloc[i,21]
     olettama=''
-    if osto==0.0: # jos ostohintaa ei ole se peritty
+    if osto==0.0: # jos ostohintaa ei ole se on 40 vuotta vanha
         osto=hinta*0.4
         olettama='40%'
-    elif osto/hinta<0.4: # muut ovat aina 5 vuotta vanhoja
+    elif osto/hinta<0.4: # muut ovat enimmäkseen 5 vuotta vanhoja
         osto=hinta*0.2
         olettama='20%'
     netto=hinta-osto
@@ -43,9 +43,10 @@ for i in range(3,3+osakkeita):
     print(f"{df.iloc[i,10]:27} {df.iloc[i,23]:9.2f} {df.iloc[i,21]:9.2f} {netto:9.2f}   {olettama} ")
     
 print()
-print(f"Yhteensä    = {summa:.2f}")
+print(f"Yhteensä    = {summa:.0f}")
 verotettu=summa-nettosumma*0.34
-print(f"Todellisuus = {verotettu:.2f} {(summa-verotettu)/summa*100:.2f}%")
+print(f"Todellisuus = {verotettu:.0f} {(summa-verotettu)/summa*100:.2f}%")
 cash=df.iloc[24,ord('F')-ord('A')]+df.iloc[1,ord('F')-ord('A')]
-print(f"Käteistä    = {cash:.2f}")     
-print(f"Brutto      = {summa+cash:.2f}")     
+print(f"Käteistä    = {cash:.0f}")     
+print(f"Brutto      = {summa+cash:.0f}")     
+print(f"Arvonnousua = {subset.dropna().sum().iloc[1]:.0f}")
