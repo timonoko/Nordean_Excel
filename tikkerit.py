@@ -1,6 +1,9 @@
 #! /usr/bin/python3
 
-# Lisää tämä koodin alkuun
+# Yhdistetään Nordean listauksen tiedot reaaliaikaiseen kurssitietoon
+
+# Yahoo ei löydä oikeita tikkereitä ainkaan näistä
+
 MAPPING = {
     "Huhtamäki Oyj": "HUH1V.HE",
     "Wärtsilä Oyj Abp": "WRT1V.HE",
@@ -12,8 +15,6 @@ MAPPING = {
     "Suominen": "SUY1V.HE",
     "Luotea Plc": "LUOTEA.HE"
     }
-
-    # ... jatkuu kuten aiemmin ...
 
 import pandas as pd
 import yfinance as yf
@@ -36,7 +37,6 @@ def get_live_rates(curr):
             fallbacks = {'SEK': 0.088, 'NOK': 0.086, 'USD': 0.92, 'DKK': 0.134}
             rates = fallbacks[curr]
     return rates
-
 
 def get_ticker_and_price(name):
     name = name.strip()

@@ -1,3 +1,5 @@
+#! /usr/bin/python3
+
 import pandas as pd
 import warnings,sys
 
@@ -5,7 +7,7 @@ warnings.filterwarnings("ignore", category=UserWarning, module='openpyxl')
 
 osakkeita=19
 
-df = pd.read_excel(sys.argv[1])
+df = pd.read_excel("Document.vnd.openxmlformats-officedocument.spreadsheetml.sheet.xlsx")
 
 def columni(x):
     return ord(x)-ord('A')
