@@ -13,7 +13,8 @@ MAPPING = {
     "KONE Oyj":"KNEBV.HE",
     "Elisa Oyj": "ELISA.HE",
     "Suominen": "SUY1V.HE",
-    "Luotea Plc": "LUOTEA.HE"
+    "Luotea Plc": "LUOTEA.HE",
+    "Norsk Hydro": "NHYDY"
     }
 
 import pandas as pd
