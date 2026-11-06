@@ -5,10 +5,13 @@ import warnings,sys
 
 warnings.filterwarnings("ignore", category=UserWarning, module='openpyxl')
 
-osakkeita=19
+osakkeita=22
 
-df = pd.read_excel("Document.vnd.openxmlformats-officedocument.spreadsheetml.sheet.xlsx")
-
+try:
+    df = pd.read_excel("Document.vnd.openxmlformats-officedocument.spreadsheetml.sheet.xlsx")
+except:
+    df = pd.read_excel("Omistukset.xlsx")
+    
 def columni(x):
     return ord(x)-ord('A')
 
@@ -27,7 +30,7 @@ print(result2)
 summa=0
 nettosumma=0
 print()
-print(" Osake                          Arvo     Osto      Voitto  Hankintaolettama")
+print(" Osake                                       Arvo     Osto      Voitto  Hankintaolettama")
 print()
 for i in range(3,3+osakkeita):
     hinta=df.iloc[i,23]
@@ -42,13 +45,13 @@ for i in range(3,3+osakkeita):
         olettama='20%'
     netto=hinta-osto
     nettosumma+=netto
-    print(f"{df.iloc[i,10]:27} {df.iloc[i,23]:9.2f} {df.iloc[i,21]:9.2f} {netto:9.2f}   {olettama} ")
+    print(f"{df.iloc[i,10]:40} {df.iloc[i,23]:9.2f} {df.iloc[i,21]:9.2f} {netto:9.2f}   {olettama} ")
     
 print()
 print(f"Yhteensä    = {summa:.0f}")
 verotettu=summa-nettosumma*0.34
 print(f"Todellisuus = {verotettu:.0f} {(summa-verotettu)/summa*100:.2f}%")
-cash=df.iloc[24,ord('F')-ord('A')]+df.iloc[1,ord('F')-ord('A')]
+cash=df.iloc[27,ord('F')-ord('A')]+df.iloc[1,ord('F')-ord('A')]
 print(f"Käteistä    = {cash:.0f}")     
 print(f"Brutto      = {summa+cash:.0f}")     
 print(f"Arvonnousua = {subset.dropna().sum().iloc[1]:.0f}")
